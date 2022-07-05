@@ -14,7 +14,7 @@ type LoggingMiddleware struct {
 	Next   StringService
 }
 
-func (mw LoggingMiddleware) UpperString(s string) (output string, err error) {
+func (mw LoggingMiddleware) UpperCase(s string) (output string, err error) {
 	defer func(begin time.Time) {
 		mw.Logger.Log(
 			"method", "uppercase",
@@ -24,7 +24,7 @@ func (mw LoggingMiddleware) UpperString(s string) (output string, err error) {
 		)
 	}(time.Now())
 
-	output, err = mw.Next.UpperString(s)
+	output, err = mw.Next.UpperCase(s)
 	return
 }
 
@@ -50,14 +50,14 @@ type InstrumentingMiddleware struct {
 	Next           StringService
 }
 
-func (imw InstrumentingMiddleware) UpperString(s string) (output string, err error) {
+func (imw InstrumentingMiddleware) UpperCase(s string) (output string, err error) {
 	defer func(begin time.Time) {
 		lvs := []string{"method", "uppercase", "error", fmt.Sprint(err != nil)}
 		imw.RequestCount.With(lvs...).Add(1)
 		imw.RequestLatency.With(lvs...).Observe(time.Since(begin).Seconds())
 	}(time.Now())
 
-	output, err = imw.Next.UpperString(s)
+	output, err = imw.Next.UpperCase(s)
 	return
 }
 

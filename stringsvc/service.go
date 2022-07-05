@@ -6,7 +6,7 @@ import (
 )
 
 type StringService interface {
-	UpperString(s string) (string, error)
+	UpperCase(s string) (string, error)
 	Count(s string) (int, error)
 }
 
@@ -18,7 +18,7 @@ func NewStringService() StringService {
 
 var ErrEmptyString = errors.New("empty string")
 
-func (ss stringService) UpperString(s string) (string, error) {
+func (ss stringService) UpperCase(s string) (string, error) {
 	if s == "" {
 		return "", ErrEmptyString
 	}

@@ -27,7 +27,7 @@ type (
 func makeUpperString(s StringService) endpoint.Endpoint {
 	return func(c context.Context, request interface{}) (interface{}, error) {
 		req := request.(UpperStringRequest)
-		resp, err := s.UpperString(req.S)
+		resp, err := s.UpperCase(req.S)
 		if err != nil {
 			return UpperStringResponse{resp, err.Error()}, err
 		}
