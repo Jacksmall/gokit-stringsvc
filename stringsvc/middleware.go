@@ -42,6 +42,7 @@ func (mw LoggingMiddleware) Count(s string) (n int, err error) {
 	return
 }
 
+// InstrumentingMiddleware struct
 type InstrumentingMiddleware struct {
 	RequestCount   metrics.Counter
 	RequestLatency metrics.Histogram
